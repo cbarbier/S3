@@ -19,6 +19,7 @@ const awsLocationEncryption = 'aws-test-encryption';
 const azureLocation = 'azuretest';
 const azureLocation2 = 'azuretest2';
 const azureLocationMismatch = 'azuretestmismatch';
+const azureLocationNonExistContainer = 'azurenonexistcontainer';
 const versioningEnabled = { Status: 'Enabled' };
 const versioningSuspended = { Status: 'Suspended' };
 const awsFirstTimeout = 10000;
@@ -58,6 +59,7 @@ const utils = {
     azureLocation,
     azureLocation2,
     azureLocationMismatch,
+    azureLocationNonExistContainer,
 };
 
 utils.getOwnerInfo = account => {
@@ -117,7 +119,7 @@ utils.getAzureClient = () => {
         params.azureStorageAccessKey, params.azureStorageEndpoint);
 };
 
-utils.getAzureContainerName = () => {
+utils.getAzureContainerName = azureLocation => {
     let azureContainerName;
     if (config.locationConstraints[azureLocation] &&
     config.locationConstraints[azureLocation].details &&
